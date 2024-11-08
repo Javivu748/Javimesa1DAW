@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="estilo-fruta.css"?>
+<fechas>
+   <fecha>
+      <dia>perro</dia>
+      <mes>4</mes>
+   </fecha>
+   <fecha>
+      <dia>pato</dia>
+      <mes>7</mes>
+   </fecha>
+   <fecha>
+      <dia>ballena</dia>
+      <mes>0</mes>
+    </fecha>
+</fechas>
+    
+	

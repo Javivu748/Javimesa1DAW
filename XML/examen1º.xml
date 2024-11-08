@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="tablaex.css"?>
+<nombres>
+    <persona>
+        <nombre>Ana</nombre>
+        <apellido>Garcia</apellido>
+        <edad>30</edad>
+        <departamento>ventas 001</departamento>
+        <cargo>Ejecutivo de ventas</cargo>
+    </persona>
+    <persona>
+        <nombre>Luis</nombre>
+        <apellido>García</apellido>
+        <edad>30</edad>
+        <departamento>Finanzas 002</departamento>
+        <cargo>Analisis financiero</cargo>
+    </persona>
+    <persona>
+        <nombre>María</nombre>
+        <apellido>López</apellido>
+        <edad>28</edad>
+        <departamento>Marketing 003</departamento>
+        <cargo>Especialista en redes sociales</cargo>
+    </persona>
+</nombres>

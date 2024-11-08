@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="Estilo.css"?>
+<catalog>
+   <book>
+      <title>Clean Code</title>
+      <author>Robert C. Martin</author>
+      <year>2008</year>
+      <publisher>Prentice Hall</publisher>
+   </book>
+   <book>
+      <title>Introduction of Algorits</title>
+      <author>Tomas H .Cormen</author>
+      <year>2009</year>
+      <publisher>MIT Press</publisher>
+   </book>
+   <book>
+      <title>Effective Java</title>
+      <author>Joshua Bloch</author>
+      <year>2018</year>
+      <publisher>Addison-Wesley</publisher>
+   </book>
+</catalog>
+ 

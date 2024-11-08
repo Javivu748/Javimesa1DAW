@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="estilo-ingrediente.css"?>
+<ingredientes>
+   <ingrediente>
+      <nombre>Cebollas</nombre>
+      <cantidad>1kg</cantidad>
+   </ingrediente>
+   <ingrediente>
+      <nombre>Caldo de carne</nombre>
+      <cantidad>2L</cantidad>
+   </ingrediente>
+   <ingrediente>
+      <nombre>Mantequilla</nombre>
+      <cantidad>100 gr</cantidad>
+    </ingrediente>
+	<ingrediente>
+      <nombre>harina</nombre>
+      <cantidad>1 cucharada</cantidad>
+    </ingrediente>
+	<ingrediente>
+      <nombre>queso emmental suizo</nombre>
+      <cantidad>100 gr</cantidad>
+    </ingrediente>
+	<ingrediente>
+      <nombre>tomillo</nombre>
+      <cantidad></cantidad>
+    </ingrediente>
+	<ingrediente>
+      <nombre>hoja de laurel</nombre>
+      <cantidad>1</cantidad>
+    </ingrediente>
+	<ingrediente>
+      <nombre>pimienta</nombre>
+      <cantidad></cantidad>
+    </ingrediente>
+</ingredientes>
+    
