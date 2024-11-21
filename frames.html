@@ -6,19 +6,63 @@
     <title>ejemploFrames</title>
 </head>
 <style>
+    body{
+        background-color: cornflowerblue;
+    }
     h1{
         text-align: center;
         font-family: Arial, Helvetica, sans-serif;
     }
     table{
         padding: 10px;
-        
+        background-color:goldenrod;
+        border-radius: 30px;
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        border-spacing: 15px;
 
 
     }
     hr{
         border: 2px solid black;
+        
     }
+    input{
+        padding: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        border-radius: 10px;
+        font-size: 16px;
+        
+    }
+    .forml1{
+        margin: 10px;
+        align:center;
+        border-collapse: collapse;
+        margin: 20px auto;    
+    }
+    td{
+        border-radius: 10px;
+        text-align: center;
+        
+    }
+    .masfem{
+        padding: 10px;
+        border: 1px;
+        
+    }
+    .sexoo{
+        border: 1px;
+    }
+    .enviar{
+        border: 1px;
+    }
+    .closeee{
+        border: 1px;
+        
+        
+        
+    }
+
     
 
 </style>
@@ -30,6 +74,7 @@
 
     <table align="center" border="2">
         <tr><td>
+            <form action="">
             Nombre:</td><td><input type="text" id="nombre" name="nombre" placeholder
                 ="ingrese su nombre"></td></tr>
             <tr><td>
@@ -38,11 +83,21 @@
             <tr><td>
                 Telefono: <td><input type="text" id="Telefono" name="Telefono" placeholder="ingrese el telefono"></td></td>
             </td></tr>
-            <tr><td>Edad: <td><input type="text" id="Edad" name="Edad" placeholder="ingrese la edad"></td></td></tr>
-
-
-
-
+            <tr><td>Edad: <td><input type="text" id="Edad" name="Edad" placeholder="ingrese la edad"></td>
+            </td></tr>
+            <tr><td>
+                Población: <td><input type="text" id="poblacion" name="poblacion" placeholder="ingrese la población"></td></td>
+            </td></tr>
+            <td class="sexoo">sexo:</td>
+            <td class="masfem"><p class="forml1">
+                
+                <input type="radio" name="sexo">masulino
+                <input type="radio" name="sexo">femenino
+                
+            </p></td>
+            <tr><td class="enviar"><input type="submit" value="enviar" name="enviar"></td><td class="closeee"><input type="submit" value="cerrar" class="cerrar" onclick="window.close();"></td><td</td></tr>
+            
+            </form>
         </td></tr>
     </table>
     
