@@ -7,6 +7,26 @@
     
 </head>
 <style>
+
+header{
+    background-color:blueviolet;
+}
+
+
+body {
+    margin: 0; 
+    height: 100vh; 
+    position: relative; 
+    background-color:lightgrey;
+    
+    
+}
+.esquina {
+    position: absolute; 
+    top: -20px; 
+    left: 0; 
+    width: 140px; 
+}
 .logo{
     width: 250px;
     position: absolute;
@@ -16,21 +36,78 @@
 }
 .box{
     margin-left: 100px;
+    background-color:deepskyblue;
 }
-.box2{
-    margin-left: 600px;
+h1{
+    text-align: center;
+    padding: 40px;
+    
+}
+h2{
+    text-align: center;
+    border: 1px solid ;
+    background-color: deepskyblue;
+    padding: 30px;
+    
+}
+.tema1{
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 830px;
+    margin-top: 50px;
+    
+    
+}
+li{
+    border: 1px solid black;
+    width: 15%;
+    margin: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    line-height: 90px;
 
+    
+}
+.tema1 :hover{
+    transform: scale(1.10);
+    border-radius: 10px;
+    
 }
 </style>
 <body>
     <header>
         <div class="box">
+            <img src="v.i.v.u (1).png" alt="Descripción de la imagen" class="esquina">
         <h1>Lenguaje de Marca 24/25</h1>
         </div>
         <div class="box2">
-        <img src="v.i.v.u (1).png" alt=""class="logo">
+    </header>    
         </div>
-    </header>
+        <article>
+            <h2>Tema 1:XML</h2>
+            <ul class="tema1">
+                <li><a href="animales.xml">Ejercicio1</a></li>
+                <li><a href="articulos.xml">Ejercicio2</a></li>
+                <li><a href="ingradientes.xml">Ejercicio3</a></li>
+            </ul>
+        <div class="tema2">
+            <h2>Tema 2:HTML</h2>
+            <ul class="tema1">
+                <li><a href="ejercicio1.html">Ejercicio1</a></li>
+                <li><a href="enlaces.html">Ejercicio2</a></li>
+                <li><a href="tabla.html">Ejercicio3</a></li>
+                <li><a href="imagenes.html">Ejercicio4</a></li>
+            </ul>
+        </div>    
+
+
+        </article>
+
+        
+
 
 </body>
 </html>
