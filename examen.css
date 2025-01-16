@@ -1,0 +1,128 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+
+}
+header{
+    background-color: blue;
+    padding: 10px;
+    
+}
+input{
+    margin: 10px;
+    margin-left: 100px;
+    background-color:aqua;
+    border: 0;
+    border-radius: 8px;
+    color: cornflowerblue;
+}
+aside{
+    border: 1px dotted black;
+    width: 350px;
+    height: 450px;
+
+}
+.notice{
+    margin-top: 10px;
+    background-color: aqua;
+    
+}
+.anuncio{
+    border: 1px dotted black;
+    height: 400px;
+    background-color:lightgoldenrodyellow;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+h2{
+    text-align: center;
+}
+h3{
+    text-align: center;
+    color: gold;
+}
+h4{
+    text-align: center;
+    color: gold;
+    font-size: 30px;
+}
+.nefli{
+    margin-top: 90px;
+    margin-left: 20px;
+    width: 300px;
+}
+p{
+    margin-left: 1em;
+}
+a{
+    margin-left: 1em;
+    color: #003366;
+    font-size: 1.3em;
+}
+section{
+    position: absolute;
+    top: 65px;
+    left: 409px;
+    height: 852px;
+    width: 1000px;
+}
+.logo{
+    border: 1px solid black;
+    width: 170px;
+    margin-left: 70px;
+    border-radius: 100px;
+}
+.argumento{
+    margin-left: 260px;
+    margin-top: -130px;
+    width: 440px;
+    
+}
+table{
+    margin-top: 100px;
+    margin-left: 100px;
+    width: 800px;
+    padding: 10px;
+
+}
+th{
+    padding: 10px;
+}
+td{
+    padding: 10px;
+    margin: 10%;
+}
+.sobreMi{
+    position: absolute;
+    top: 74px;
+    left: 1411px;
+    height: 700px;
+    width: 300px;
+    border: 2px solid gold;
+}
+h5{
+    text-align: center;
+}
+.maaas{
+    border-radius: 1px;
+    margin: 0;
+    width: 140px;
+    margin-left: 80px;
+    margin-top: 10px;
+    color: aqua;
+    background-color: gold;
+    font-size: 20px;
+}
+.textAnuncio{
+    color: #999;
+}
+footer{
+    border: 1px solid black;
+    padding: 10px;
+    background-color: aqua;
+}
+.final{
+    text-align: right;
+    margin-top: -15px;
+    color: #999;
+}
