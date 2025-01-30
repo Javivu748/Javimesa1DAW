@@ -1,11 +1,12 @@
 .container{
     margin-top: 200px;
-    padding: 20px;
-    width: 600px;
-    height: 250px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+    width: 500px;
+    height: 320px;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: #eeeeee;
+    background-color:gray;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,12 +21,22 @@
     /* Or shorthand */
     gap: 10px 10px;
 }
+.numero{
+    position: absolute;
+    margin-top: -120px;
+    border: 1px solid black;
+    width: 460px;
+    border-radius: 10px;
+    text-align: right;
+    font-size: 20px;
+    background-color:yellowgreen;
+}
 .item {
     height: 50px;
     width: 100px;
-    background: #b1782e;
+    background:whitesmoke;
     border-radius: 1rem;
-    color: #fff;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
