@@ -1,3 +1,20 @@
 {
     "livePreview.defaultPreviewPath": "/index.html"
-}
+    
+}}
+
+{
+    "background.editor": {
+      "useFront": true,
+      "style": {
+        "background-position": "100% 100%",
+        "background-size": "auto",
+        "opacity": 0.6
+      },
+      "styles": [{}, {}, {}],
+      // Local images can be dragged into the browser to quickly get the file protocol address from the address bar
+      "images": ["https://fbi.cults3d.com/uploaders/16688161/illustration-file/aa1e91b4-e008-4b7f-8eda-4118c69e366a/One-Piece-Gear-5-Sensation-Reaches-International-Theatres.webp"],
+      "interval": 0,
+      "random": false
+    }
+  }
