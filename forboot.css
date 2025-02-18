@@ -1,0 +1,14 @@
+label, input, select{
+    display: block;
+    width: 300px;
+    margin-bottom: 20px;
+}
+fieldset{
+    padding: 3%;
+}
+
+input[type=radio], select{
+    display: flex;
+    margin-bottom: 10px;
+}
+
