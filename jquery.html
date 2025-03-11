@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".inicio").click(function(){
+    $(".panel").slideDown("slow");
+  });
+  $(".cerrar").click(function(){
+    $(".panel").slideUp("slow");
+  });
+});
+$(document).ready(function(){
+  $(".boton").click(function(){
+    $(".panel2").slideDown("slow");
+  });
+  $(".cerrar").click(function(){
+    $(".panel2").slideUp("slow");
+  });
+});
+
+</script>
+<style>
+    .panel{
+        width: 402px;
+        height: 400px;
+        background-color:greenyellow;
+        display: none;
+        align-items: center;
+        text-align: center;
+        margin-top: -32px;
+        border: 1px solid black;
+    }
+    .inicio{
+        background-color: red;
+        width: 200px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border: 1px solid black;
+    }
+    .cerrar{
+        background-color: blue;
+        display: flex;
+        align-items: center;
+        width: 200px;
+        border: 1px solid black;
+    }
+    .bloque{
+        display: flex;
+        margin: 0;
+
+    }
+    .panel2{
+        background-color: aqua;
+        height: 100px;
+        display: none;
+    }
+    .boton{
+        border: 1px solid black;
+    }
+ 
+        
+        
+</style>
+<body>
+    <form>
+        <div class="bloque">
+            <p class="inicio">abrir</p>
+            <p class="cerrar">cerrar</p>
+        </div>
+        <div class="panel">
+            <p>hola buenos dias</p>
+            <p class="boton">abrir segundo panel</p>
+            <div class="panel2">
+                <p>sub panel</p>
+            </div>
+        </div>
+        
+
+    </form>
+
+</body>
+</html>

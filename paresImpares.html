@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+const boton1=document.getElementById('boton1');
+const textos=document.getElementById('textos');
+
+
+
+//crear boton para cambiar el color de textos
+boton1.addEventListener('click',function(){
+    //cambiar color de textos
+    textos.style.color='White';
+});
+
+</script>
+<style>
+    body {
+        align-items: center;
+    }
+    .botones{
+        display: flex;
+        position: absolute;
+        left: 800px;
+    }
+    button{
+        background-color: dodgerblue;
+        color: white;
+        border-color: chartreuse;
+        width: 100px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <div class="botones">
+    <button id="boton1">ocultar pares</button>
+    <button id="boton2">ocultar impares</button>
+    </div>
+
+    <div class="textos">
+        <p id="textos">bhaBHDKBDISHFUIHsufehuHDHU</p>
+        <p id="textos">NUJnfjNOFOFHOFHouifof</p>
+        <p id="textos">HUOhfJHFOhofhofhoIUJHF</p>
+        <p id="textos">hudeahudgheaudeauigduiagfuiagdhaiuda</p>
+
+    </div>
+
+
+</body>
+</html>
