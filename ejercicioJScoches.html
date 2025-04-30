@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cuadroTipos {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .cuadroTipos input {
+            margin: 10px;
+            margin-bottom: 20px;
+        }
+        #resultado {
+            margin-top: 20px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="tiposCoche">
+        <h1>Selección de características de coche</h1>
+        <div class="cuadroTipos">
+            <h2>Tipo motor</h2>
+            <input type="radio" name="tipoMotor" value="Gasolina" onchange="mostrarSeleccion()">Gasolina
+            <input type="radio" name="tipoMotor" value="Diésel" onchange="mostrarSeleccion()">Diésel
+            <input type="radio" name="tipoMotor" value="Híbrido" onchange="mostrarSeleccion()">Híbrido
+            <input type="radio" name="tipoMotor" value="Eléctrico" onchange="mostrarSeleccion()">Eléctrico
+        </div>
+        <div class="cuadroTipos">
+            <h2>Transmisión</h2>
+            <input type="radio" name="transmision" value="Manual" onchange="mostrarSeleccion()">Manual
+            <input type="radio" name="transmision" value="Automático" onchange="mostrarSeleccion()">Automático
+            <input type="radio" name="transmision" value="CVT" onchange="mostrarSeleccion()">CVT
+            <input type="radio" name="transmision" value="Doble embrague" onchange="mostrarSeleccion()">Doble embrague
+        </div>
+        <div class="cuadroTipos">
+            <h2>Tracción</h2>
+            <input type="radio" name="traccion" value="Delantera (FDW)" onchange="mostrarSeleccion()">Delantera (FDW)
+            <input type="radio" name="traccion" value="Trasera (RWD)" onchange="mostrarSeleccion()">Trasera (RWD)
+            <input type="radio" name="traccion" value="Total o integral (AWD o 4X4)" onchange="mostrarSeleccion()">Total o integral (AWD o 4X4)
+        </div>
+        <div class="cuadroTipos">
+            <h2>Tipos de carrocería</h2>
+            <input type="radio" name="carroceria" value="Sedán" onchange="mostrarSeleccion()">Sedán
+            <input type="radio" name="carroceria" value="Hatchback" onchange="mostrarSeleccion()">Hatchback
+            <input type="radio" name="carroceria" value="SUV" onchange="mostrarSeleccion()">SUV
+            <input type="radio" name="carroceria" value="Coupé" onchange="mostrarSeleccion()">Coupé
+            <input type="radio" name="carroceria" value="Cabrio/descapotable" onchange="mostrarSeleccion()">Cabrio/descapotable
+            <input type="radio" name="carroceria" value="Familiar" onchange="mostrarSeleccion()">Familiar
+            <input type="radio" name="carroceria" value="Pick-up" onchange="mostrarSeleccion()">Pick-up
+            <input type="radio" name="carroceria" value="Monovolumen" onchange="mostrarSeleccion()">Monovolumen
+        </div>
+        <div class="cuadroTipos">
+            <h2>Número de Puertas</h2>
+            <input type="radio" name="numeroPuertas" value="2 puertas" onchange="mostrarSeleccion()">2 puertas
+            <input type="radio" name="numeroPuertas" value="3 puertas" onchange="mostrarSeleccion()">3 puertas
+            <input type="radio" name="numeroPuertas" value="4 puertas" onchange="mostrarSeleccion()">4 puertas
+            <input type="radio" name="numeroPuertas" value="5 puertas" onchange="mostrarSeleccion()">5 puertas
+        </div>
+    </section>
+    <div id="resultado">
+        <h2>Selecciones:</h2>
+        <p id="seleccionesTexto">Ninguna</p>
+        <button onclick="enviarAAPI()">Enviar a la API</button>
+    </div>
+    <script>
+        function mostrarSeleccion() {
+            const tipoMotor = document.querySelector('input[name="tipoMotor"]:checked');
+            const transmision = document.querySelector('input[name="transmision"]:checked');
+            const traccion = document.querySelector('input[name="traccion"]:checked');
+            const carroceria = document.querySelector('input[name="carroceria"]:checked');
+            const numeroPuertas = document.querySelector('input[name="numeroPuertas"]:checked');
+    
+            let selecciones = [];
+    
+            if (tipoMotor) {
+                selecciones.push(`Tipo de motor: ${tipoMotor.value}`);
+            }
+            if (transmision) {
+                selecciones.push(`Transmisión: ${transmision.value}`);
+            }
+            if (traccion) {
+                selecciones.push(`Tracción: ${traccion.value}`);
+            }
+            if (carroceria) {
+                selecciones.push(`Carrocería: ${carroceria.value}`);
+            }
+            if (numeroPuertas) {
+                selecciones.push(`Número de puertas: ${numeroPuertas.value}`);
+            }
+    
+            const resultadoTexto = selecciones.length > 0 ? selecciones.join('<br>') : 'Ninguna';
+            document.getElementById('seleccionesTexto').innerHTML = resultadoTexto;
+        }
+    </script>
+    <script>
+        function enviarAAPI() {
+    const tipoMotor = document.querySelector('input[name="tipoMotor"]:checked')?.value;
+    const transmision = document.querySelector('input[name="transmision"]:checked')?.value;
+    const traccion = document.querySelector('input[name="traccion"]:checked')?.value;
+    const carroceria = document.querySelector('input[name="carroceria"]:checked')?.value;
+    const numeroPuertas = document.querySelector('input[name="numeroPuertas"]:checked')?.value;
+
+    const datos = {
+        tipoMotor,
+        transmision,
+        traccion,
+        carroceria,
+        numeroPuertas
+    };
+
+    // Enviar a la API usando fetch
+    fetch('https://miapi.com/enviarSeleccion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta de la API:', data);
+        alert('Datos enviados correctamente.');
+    })
+    .catch(error => {
+        console.error('Error al enviar datos:', error);
+        alert('Hubo un error al enviar los datos.');
+    });
+}
+    </script>

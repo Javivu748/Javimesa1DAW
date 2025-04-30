@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas de Multiplicar</title>
+    <style>
+        body {font-family: Arial, sans-serif; text-align: center; 
+        }
+        .tables-container { display: flex; flex-wrap: wrap; justify-content: center; 
+        }
+        .table { margin: 10px; padding: 10px; border: 1px solid black; width: 150px; 
+        }
+    </style>
+</head>
+<script>
+    function generateTables() {
+        let num = document.getElementById("number").value;
+        let output = document.getElementById("output");
+        output.innerHTML = "";
+        
+        for (let i = 1; i <= num; i++) {
+            let tableDiv = document.createElement("div");
+            tableDiv.className = "table";
+            tableDiv.innerHTML = `<h3>Tabla del ${i}</h3>`;
+            for (let j = 1; j <= 10; j++) {
+                tableDiv.innerHTML += `${i} x ${j} = ${i * j}<br>`;
+            }
+            output.appendChild(tableDiv);
+        }
+    }
+</script>
+<body>
+   
+    <h1>Tablas de Multiplicar</h1>
+    <label for="number">Ingrese un número: </label>
+    <input type="number" id="number" min="1" max="20">
+    <button onclick="generateTables()">Generar</button>
+    <div class="tables-container" id="output"></div>
+
+</body>
+</html>
