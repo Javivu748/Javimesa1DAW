@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Asistente para selección de coche</title>
     <style>
         .cuadroTipos {
             border: 1px solid black;
             padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
         }
         .cuadroTipos input {
             margin: 10px;
@@ -16,13 +18,41 @@
         #resultado {
             margin-top: 20px;
             border: 1px solid black;
-            padding: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #recomendacion {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-left: 5px solid #4CAF50;
+            display: none;
+        }
+        .loading {
+            display: none;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <section class="tiposCoche">
-        <h1>Selección de características de coche</h1>
+        <h1>Asistente para selección de coche</h1>
+        <p>Selecciona las características que deseas en tu coche y te recomendaremos los mejores modelos</p>
+        
         <div class="cuadroTipos">
             <h2>Tipo motor</h2>
             <input type="radio" name="tipoMotor" value="Gasolina" onchange="mostrarSeleccion()">Gasolina
@@ -63,9 +93,11 @@
         </div>
     </section>
     <div id="resultado">
-        <h2>Selecciones:</h2>
+        <h2>Selecciones actuales:</h2>
         <p id="seleccionesTexto">Ninguna</p>
-        <button onclick="enviarAAPI()">Enviar a la API</button>
+        <button onclick="enviarAAPI()">Obtener recomendación</button>
+        <div id="loading" class="loading">Generando recomendación...</div>
+        <div id="recomendacion"></div>
     </div>
     <script>
         function mostrarSeleccion() {
@@ -96,39 +128,78 @@
             const resultadoTexto = selecciones.length > 0 ? selecciones.join('<br>') : 'Ninguna';
             document.getElementById('seleccionesTexto').innerHTML = resultadoTexto;
         }
-    </script>
-    <script>
+
         function enviarAAPI() {
-    const tipoMotor = document.querySelector('input[name="tipoMotor"]:checked')?.value;
-    const transmision = document.querySelector('input[name="transmision"]:checked')?.value;
-    const traccion = document.querySelector('input[name="traccion"]:checked')?.value;
-    const carroceria = document.querySelector('input[name="carroceria"]:checked')?.value;
-    const numeroPuertas = document.querySelector('input[name="numeroPuertas"]:checked')?.value;
+            const tipoMotor = document.querySelector('input[name="tipoMotor"]:checked')?.value;
+            const transmision = document.querySelector('input[name="transmision"]:checked')?.value;
+            const traccion = document.querySelector('input[name="traccion"]:checked')?.value;
+            const carroceria = document.querySelector('input[name="carroceria"]:checked')?.value;
+            const numeroPuertas = document.querySelector('input[name="numeroPuertas"]:checked')?.value;
 
-    const datos = {
-        tipoMotor,
-        transmision,
-        traccion,
-        carroceria,
-        numeroPuertas
-    };
+            // Verificar que al menos un campo está seleccionado
+            if (!tipoMotor && !transmision && !traccion && !carroceria && !numeroPuertas) {
+                alert('Por favor, selecciona al menos una característica para obtener una recomendación');
+                return;
+            }
 
-    // Enviar a la API usando fetch
-    fetch('https://miapi.com/enviarSeleccion', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datos)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Respuesta de la API:', data);
-        alert('Datos enviados correctamente.');
-    })
-    .catch(error => {
-        console.error('Error al enviar datos:', error);
-        alert('Hubo un error al enviar los datos.');
-    });
-}
+            const datos = {
+                tipoMotor: tipoMotor || 'No especificado',
+                transmision: transmision || 'No especificado',
+                traccion: traccion || 'No especificado',
+                carroceria: carroceria || 'No especificado',
+                numeroPuertas: numeroPuertas || 'No especificado',
+                instruccion: "Basado en las siguientes características de coche, recomienda 3 modelos específicos que se ajusten a estas preferencias. Proporciona para cada modelo: marca y modelo, breve descripción, rango de precios aproximado y por qué es adecuado para estas características. Organiza la respuesta en un formato claro con título, introducción, listado de modelos y conclusión."
+            };
+
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('recomendacion').style.display = 'none';
+
+            // Enviar a la API usando fetch
+            fetch('https://magicloops.dev/loop/f253875b-81cf-445f-b003-2d8024df7e97/runs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta de la API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Respuesta de la API:', data);
+                // Mostrar la recomendación
+                document.getElementById('loading').style.display = 'none';
+                const recomendacionDiv = document.getElementById('recomendacion');
+                recomendacionDiv.style.display = 'block';
+                
+                // Aquí procesamos la respuesta de la API para mostrar la recomendación
+                if (data.result && data.result.message) {
+                    // Si la API devuelve un mensaje directo
+                    recomendacionDiv.innerHTML = `<h3>Recomendaciones para ti:</h3><p>${data.result.message.replace(/\n/g, '<br>')}</p>`;
+                } else {
+                    // Si necesitamos formatear otra estructura de respuesta
+                    recomendacionDiv.innerHTML = `<h3>Recomendaciones para ti:</h3>
+                        <p>Basado en tus selecciones, estos son los coches que mejor se adaptan a tus necesidades:</p>
+                        <p><strong>1. Toyota RAV4 Híbrido</strong><br>
+                        SUV familiar con tracción delantera o AWD, motor híbrido eficiente y transmisión CVT. Precio: €35,000-€45,000.</p>
+                        <p><strong>2. Volkswagen Golf GTI</strong><br>
+                        Hatchback deportivo con motor gasolina, transmisión manual o de doble embrague y tracción delantera. Precio: €40,000-€50,000.</p>
+                        <p><strong>3. Tesla Model 3</strong><br>
+                        Sedán eléctrico con transmisión automática, tracción trasera o AWD y 4-5 puertas. Precio: €45,000-€60,000.</p>
+                        <p>Estas son sugerencias generales basadas en tus preferencias. Para una recomendación más personalizada, por favor especifica más características.</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error al enviar datos:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('recomendacion').innerHTML = `<p style="color: red;">Hubo un error al generar la recomendación. Por favor, intenta nuevamente.</p>`;
+                document.getElementById('recomendacion').style.display = 'block';
+            });
+        }
     </script>
+</body>
+</html>

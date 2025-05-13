@@ -1,0 +1,53 @@
+{
+    "employees": [
+      {
+        "employee": "Employee 1",
+        "name": "Juan Pérez",
+        "age": 35,
+        "position": "Senior Developer",
+        "department": "Technology",
+        "salary": 75000,
+        "location": "Madrid, Spain"
+      },
+      {
+        "employee": "Employee 2",
+        "name": "Maria Rodríguez",
+        "age": 28,
+        "position": "Graphic Designer",
+        "department": "Design",
+        "salary": 60000,
+        "location": "Paris, France"
+      },
+      {
+        "employee": "Employee 3",
+        "name": "Carlos Gómez",
+        "age": 40,
+        "position": "Project Manager",
+        "department": "Project Management",
+        "salary": 90000,
+        "location": "Berlin, Germany"
+      }
+    ]
+  }
+  {
+    "rss": {
+      "version": "2.0",
+      "channel": {
+        "title": "Ejemplo de Feed RSS",
+        "link": "https://www.ejemplo.com/rss",
+        "description": "Este es un ejemplo de un feed RSS.",
+        "item": [
+          {
+            "title": "Artículo 1",
+            "link": "https://www.ejemplo.com/artículo1",
+            "description": "Este es el primer artículo del feed."
+          },
+          {
+            "title": "Artículo 2",
+            "link": "https://www.ejemplo.com/artículo2",
+            "description": "Este es el segundo artículo del feed."
+          }
+        ]
+      }
+    }
+  }
