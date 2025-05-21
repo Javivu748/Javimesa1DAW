@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas XQuery sobre Libros</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { color: #2c3e50; border-bottom: 1px solid #3498db; padding-bottom: 5px; }
+        .result { background-color: #f8f9fa; border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .author-list { column-count: 3; }
+        .author-item { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Consultas XQuery sobre Libros</h1>
+
+    <!-- Consulta 1: Título con número de autores -->
+    <h2>1. Título con número de autores</h2>
+    <div class="result">
+        <ul>
+        {
+            for $book in doc("")/bookstore/book
+            return <li>{$book/title/text()} ({count($book/author)})</li>
+        }
+        </ul>
+    </div>
+
+    <!-- Consulta 2: Libros publicados en años que terminan en "3" -->
+    <h2>2. Libros publicados en años que terminan en "3"</h2>
+    <div class="result">
+        <ul>
+        {
+            for $book in doc("")/bookstore/book[ends-with(year, '3')]
+            return <li>{$book/title/text()} ({$book/year/text()})</li>
+        }
+        </ul>
+    </div>
+
+    <!-- Consulta 3: Libros cuya categoría empieza por "C" -->
+    <h2>3. Libros cuya categoría empieza por "C"</h2>
+    <div class="result">
+        <ul>
+        {
+            for $book in doc("")/bookstore/book[starts-with(@category, 'C')]
+            return <li>{$book/title/text()} (Categoría: {$book/@category/string()})</li>
+        }
+        </ul>
+    </div>
+
+    <!-- Consulta 4: Libros con "X" en el título (orden descendente) -->
+    <h2>4. Libros con "X" en el título (orden descendente)</h2>
+    <div class="result">
+        <ul>
+        {
+            for $book in doc("")/bookstore/book[contains(translate(title, 'x', 'X'), 'X')]
+            order by $book/title descending
+            return <li>{$book/title/text()}</li>
+        }
+        </ul>
+    </div>
+
+    <!-- Consulta 5: Título y longitud del título -->
+    <h2>5. Título y longitud del título</h2>
+    <div class="result">
+        <table>
+            <tr><th>Título</th><th>Longitud</th></tr>
+            {
+            for $book in doc("")/bookstore/book
+            return 
+                <tr>
+                    <td>{$book/title/text()}</td>
+                    <td>{string-length($book/title)}</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <!-- Consulta 6: Años de publicación sin repetir -->
+    <h2>6. Años de publicación (sin repetir)</h2>
+    <div class="result">
+        <ul>
+        {
+            for $year in distinct-values(doc("")/bookstore/book/year)
+            order by $year
+            return <li><año>{$year}</año></li>
+        }
+        </ul>
+    </div>
+
+    <!-- Consulta 7: Autores únicos ordenados por longitud -->
+    <h2>7. Autores únicos ordenados por longitud</h2>
+    <div class="result">
+        <div class="author-list">
+        {
+            for $author in distinct-values(doc("")/bookstore/book/author)
+            order by string-length($author)
+            return <div class="author-item">{$author}</div>
+        }
+        </div>
+    </div>
+
+    <!-- Consulta 8: Títulos en tabla HTML -->
+    <h2>8. Títulos en tabla HTML</h2>
+    <div class="result">
+        {
+            <table>
+                <tr><th>Título</th><th>Idioma</th></tr>
+                {
+                for $book in doc("")/bookstore/book
+                return 
+                    <tr>
+                        <td>{$book/title/text()}</td>
+                        <td>{$book/title/@lang/string()}</td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</body>
+</html>

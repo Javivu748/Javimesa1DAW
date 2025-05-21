@@ -1,0 +1,80 @@
+xquery version "3.1";
+
+let $books := /bookstore/book
+return
+<resultados>
+  <!-- 1. Título con número de autores entre paréntesis -->
+  <consulta1>
+    {
+      for $book in $books
+      return <libro>{data($book/title)} ({count($book/author)})</libro>
+    }
+  </consulta1>
+  
+  <!-- 2. Libros escritos en años que terminan en "3" -->
+  <consulta2>
+    {
+      $books[ends-with(year, '3')]
+    }
+  </consulta2>
+  
+  <!-- 3. Libros cuya categoría empieza por "C" -->
+  <consulta3>
+    {
+      $books[starts-with(@category, 'C')]
+    }
+  </consulta3>
+  
+  <!-- 4. Libros con "X" en el título (case insensitive) ordenados descendentes -->
+  <consulta4>
+    {
+      for $book in $books
+      where contains(lower-case($book/title), 'x')
+      order by $book/title descending
+      return $book
+    }
+  </consulta4>
+  
+  <!-- 5. Título y número de caracteres del título -->
+  <consulta5>
+    {
+      for $book in $books
+      return (
+        <libro>
+          <titulo>{data($book/title)}</titulo>
+          <caracteres>{string-length($book/title)}</caracteres>
+        </libro>
+      )
+    }
+  </consulta5>
+  
+  <!-- 6. Años de publicación sin repetir -->
+  <consulta6>
+    {
+      for $year in distinct-values($books/year)
+      return <año>{$year}</año>
+    }
+  </consulta6>
+  
+  <!-- 7. Autores únicos ordenados por longitud -->
+  <consulta7>
+    {
+      for $author in distinct-values($books/author)
+      order by string-length($author)
+      return <autor>{$author}</autor>
+    }
+  </consulta7>
+  
+  <!-- 8. Títulos en tabla HTML -->
+  <consulta8>
+    {
+      <table border="1">
+        <tr><th>Títulos</th></tr>
+        {
+          for $book in $books
+          return <tr><td>{data($book/title)}</td></tr>
+        }
+      </table>
+    }
+  </consulta8>
+</resultados>
