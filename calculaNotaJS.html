@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Notas Mejorada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+            display: none;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 18px;
+        }
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .total-check {
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Notas Mejorada</h1>
+        
+        <div class="form-group">
+            <label for="correctas">Preguntas acertadas:</label>
+            <input type="number" id="correctas" min="0" max="27" value="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="falladas">Preguntas falladas (contestadas incorrectamente):</label>
+            <input type="number" id="falladas" min="0" max="27" value="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="no-contestadas">Preguntas no contestadas:</label>
+            <input type="number" id="no-contestadas" min="0" max="27" value="0">
+            <div id="total-check" class="total-check"></div>
+            <div id="error-total" class="error" style="display: none;">¡La suma debe ser exactamente 27 preguntas!</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="penalizacion">Tipo de penalización por fallo:</label>
+            <select id="penalizacion">
+                <option value="0">Sin resta de fallos</option>
+                <option value="0.1">Cada fallo -0.1</option>
+                <option value="0.2">Cada fallo -0.2</option>
+                <option value="0.3" selected>Cada fallo -0.3</option>
+            </select>
+        </div>
+        
+        <button onclick="calcularNota()">Calcular Nota</button>
+        
+        <div id="resultado" class="result">
+            <h3>Resultado:</h3>
+            <p>Preguntas acertadas: <span id="aciertos"></span></p>
+            <p>Preguntas falladas: <span id="fallos"></span></p>
+            <p>Preguntas no contestadas: <span id="no-contestadas-result"></span></p>
+            <p>Penalización por fallo: <span id="tipo-penalizacion"></span></p>
+            <p>Nota final: <span id="nota-final" class="highlight"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function actualizarTotal() {
+            const correctas = parseInt(document.getElementById('correctas').value) || 0;
+            const falladas = parseInt(document.getElementById('falladas').value) || 0;
+            const noContestadas = parseInt(document.getElementById('no-contestadas').value) || 0;
+            
+            const total = correctas + falladas + noContestadas;
+            document.getElementById('total-check').textContent = `Total: ${total}/27 preguntas`;
+            
+            if (total > 27) {
+                document.getElementById('total-check').style.color = 'red';
+            } else {
+                document.getElementById('total-check').style.color = 'inherit';
+            }
+        }
+        
+        // Actualizar el total cuando cambia cualquier campo
+        document.getElementById('correctas').addEventListener('input', actualizarTotal);
+        document.getElementById('falladas').addEventListener('input', actualizarTotal);
+        document.getElementById('no-contestadas').addEventListener('input', actualizarTotal);
+        
+        function calcularNota() {
+            // Obtener valores del formulario
+            const correctas = parseInt(document.getElementById('correctas').value) || 0;
+            const falladas = parseInt(document.getElementById('falladas').value) || 0;
+            const noContestadas = parseInt(document.getElementById('no-contestadas').value) || 0;
+            const penalizacion = parseFloat(document.getElementById('penalizacion').value);
+            
+            // Validar que la suma sea 27
+            const total = correctas + falladas + noContestadas;
+            if (total !== 27) {
+                document.getElementById('error-total').style.display = 'block';
+                document.getElementById('resultado').style.display = 'none';
+                return;
+            } else {
+                document.getElementById('error-total').style.display = 'none';
+            }
+            
+            // Calcular nota base (sobre las contestadas)
+            const preguntasContestadas = correctas + falladas;
+            let nota;
+            
+            if (preguntasContestadas > 0) {
+                nota = (correctas / 27) * 10;
+            } else {
+                nota = 0;
+            }
+            
+            // Aplicar penalización solo a las falladas
+            nota -= falladas * penalizacion;
+            
+            // Asegurar que la nota no sea negativa
+            nota = Math.max(0, nota);
+            
+            // Redondear a 2 decimales
+            nota = Math.round(nota * 100) / 100;
+            
+            // Mostrar resultados
+            document.getElementById('aciertos').textContent = correctas;
+            document.getElementById('fallos').textContent = falladas;
+            document.getElementById('no-contestadas-result').textContent = noContestadas;
+            
+            let textoPenalizacion = "No se aplica penalización";
+            if (penalizacion > 0) {
+                textoPenalizacion = `-${penalizacion} por fallo (total: -${(falladas * penalizacion).toFixed(2)})`;
+            }
+            
+            document.getElementById('tipo-penalizacion').textContent = textoPenalizacion;
+            document.getElementById('nota-final').textContent = nota.toFixed(2);
+            
+            // Mostrar el contenedor de resultados
+            document.getElementById('resultado').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
